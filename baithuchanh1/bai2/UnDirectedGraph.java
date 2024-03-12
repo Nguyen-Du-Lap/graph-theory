@@ -57,7 +57,7 @@ public class UnDirectedGraph extends Graph {
         final int RED_COLOR = 1;
         final int GREEN_COLOR = 2;
         for(int i = 0; i < vertex; i++) {
-            colors[i] = NONE_COLOR;
+            colors[i] = NONE_COLOR;     //
         }
         Queue<Integer> queue = new LinkedList<>();
 
