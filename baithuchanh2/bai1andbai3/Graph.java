@@ -14,4 +14,8 @@ public abstract class Graph {
     public abstract void printAdjList();
     public abstract boolean isSimpleGraph();
     public abstract void bfs(int v);
+    public abstract void dfs(int v);
+    public abstract boolean isConnect();
+    public abstract boolean isPath(int x, int y);
+    public abstract int countConnect();
 }
