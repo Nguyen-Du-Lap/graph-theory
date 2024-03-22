@@ -50,5 +50,4 @@ public abstract class Graph {
     public abstract boolean isConnectionDFSStack();
     public abstract boolean isEuler();
     public abstract boolean isHalfEuler();
-    public abstract void euler();
 }

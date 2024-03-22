@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class Test {
     public static void main(String[] args) throws IOException {
-//        Graph g1 = new UnDirectedGraph("baithuchanh2/bai1andbai3/H1.txt");
+        Graph g1 = new UnDirectedGraph("baithuchanh2/bai1andbai3/H1.txt");
 //        g1.printMatrix();
 //        System.out.println(g1.isSimpleGraph());
 //        g1.bfs(5);

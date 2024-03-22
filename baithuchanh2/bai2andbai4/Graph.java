@@ -1,6 +1,7 @@
 package baithuchanh2.bai2andbai4;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -17,4 +18,5 @@ public abstract class Graph {
     public abstract boolean isConnect();
     public abstract boolean isPath(int x, int y);
     public abstract int countConnect();
+    public abstract List<Integer> euler(int a);
 }

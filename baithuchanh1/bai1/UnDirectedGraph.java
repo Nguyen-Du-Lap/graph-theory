@@ -176,52 +176,9 @@ public class UnDirectedGraph extends Graph {
         for(int i = 0; i < vertex; i++) {
             if(degree(i) % 2 != 0) countOdd++;
         }
-        return countOdd == 2 && countOdd == 0;
+        return countOdd == 2 || countOdd == 0;
     }
 
-    @Override
-    public void euler() {
-        if(!isEuler()) return;
-        List<Integer> C = new LinkedList<>();
-        Random random = new Random();
-        int a = random.nextInt(vertex);
-        C.add(a);
-        int[][] H = new int[vertex][vertex];
-        for (int i = 0; i < H.length; i++) {
-            for (int j = 0; j < H[i].length; j++) {
-                H[i][j] = adjMatrix[i][j];
-            }
-        }
-        int edges = edgesH(H, vertex);
-        boolean[] isolation = new boolean[vertex];
-        while (edges > 0) {
-            int v = -1;
-            boolean foundV = false;
-            for (int i = 0; i < H.length && !foundV; i++) {
-                if (C.contains(i)) {
-                    v = i;
-                    foundV = true;
-                }
-            }
-
-        }
-    }
-    public int degreeH(int v, int[][] H) {
-        int s = 0;
-        for (int i = 0; i < H.length; i++) {
-            if (i == v) s += H[v][i] * 2;
-            else s += H[v][i];
-        }
-        return s;
-    }
-
-    public int edgesH(int[][] H, int vertexCount) {
-        int edges = 0;
-        for (int i = 0; i < vertexCount; i++) {
-            edges += degreeH(i, H);
-        }
-        return edges / 2;
-    }
 
 
 }

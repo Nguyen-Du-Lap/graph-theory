@@ -86,9 +86,5 @@ public class DirectedGraph extends Graph {
         return false;
     }
 
-    @Override
-    public void euler() {
-
-    }
 
 }

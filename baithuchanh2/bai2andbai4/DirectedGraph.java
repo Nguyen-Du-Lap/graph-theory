@@ -165,4 +165,9 @@ public class DirectedGraph extends Graph {
     public int countConnect() {
         return 0;
     }
+
+    @Override
+    public List<Integer> euler(int a) {
+        return null;
+    }
 }

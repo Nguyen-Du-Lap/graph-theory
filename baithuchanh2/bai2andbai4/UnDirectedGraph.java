@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
+import java.util.function.IntBinaryOperator;
 
 public class UnDirectedGraph extends Graph {
     public UnDirectedGraph(String path) throws IOException {
@@ -168,5 +169,45 @@ public class UnDirectedGraph extends Graph {
         }
 
         return count;
+    }
+
+    @Override
+    public List<Integer> euler(int a) {
+        if(!isConnect()) return null;
+        for(Map.Entry<Integer, Set<Integer>> entry : adjList.entrySet()) {
+            if(entry.getValue().size() %2 != 0) return null;
+        }
+        List<Integer> C = new ArrayList<>();
+        C.add(a);
+        Map<Integer, Set<Integer>> H = new HashMap<>(adjList);
+//        while(H) {
+//
+//        }
+        return C;
+    }
+    public int edges() {
+        int count = 0;
+        for(Map.Entry<Integer,Set<Integer>> entry : adjList.entrySet()) {
+            count += entry.getValue().size();
+        }
+        return count/2;
+    }
+    public void removeEdge(int i, int j) {
+        try {
+            Set<Integer> listI = this.adjList.get(i);
+            Set<Integer> listJ = this.adjList.get(j);
+            listI.remove(j);
+            listJ.remove(i);
+            if(listI.isEmpty()) {
+                this.adjList.remove(i);
+            } else this.adjList.put(i, listI);
+
+            if(listJ.isEmpty()) {
+                this.adjList.remove(j);
+            } else this.adjList.put(j, listJ);
+        }catch (NullPointerException e) {
+            System.out.println(e);
+            System.out.printf("vertices %d or %d is null\n", i, j);
+        }
     }
 }

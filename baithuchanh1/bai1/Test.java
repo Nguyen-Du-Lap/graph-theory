@@ -47,7 +47,6 @@ public class Test {
         G4.addEdge(2,4);
         G4.addEdge(3,4);
         System.out.println(G4.isEuler());
-        G4.euler();
         Graph G5 = new UnDirectedGraph(4);
         G5.addEdge(0, 2);
         G5.addEdge(0, 2);
@@ -57,7 +56,6 @@ public class Test {
         G5.addEdge(1, 3);
         G5.addEdge(2, 3);
         System.out.println(G5.isEuler());
-        G5.euler();
 
     }
 }

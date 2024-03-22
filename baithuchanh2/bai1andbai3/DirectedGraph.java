@@ -229,4 +229,5 @@ public class DirectedGraph extends Graph {
 
         return countConnect;
     }
+
 }
