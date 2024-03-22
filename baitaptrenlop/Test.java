@@ -19,5 +19,6 @@ public class Test {
         int i = 3;
         double d = b/i;
         System.out.println(d);
+        
     }
 }

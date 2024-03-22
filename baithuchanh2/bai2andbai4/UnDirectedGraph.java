@@ -63,4 +63,110 @@ public class UnDirectedGraph extends Graph {
             System.out.println();
         }
     }
+
+    @Override
+    public boolean isSimpleGraph() {
+        return true;
+    }
+
+    @Override
+    public void bfs(int v) {
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[vertex];
+        queue.add(v);
+        visited[v] = true;
+        while(!queue.isEmpty()) {
+            int nodeCurrent = queue.poll();
+            System.out.print(nodeCurrent+" ");
+            Set<Integer> listNeighbor = adjList.get(nodeCurrent);
+            for(int e : listNeighbor) {
+                if(!visited[e]) {
+                    queue.add(e);
+                    visited[e] = true;
+                }
+            }
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void dfs(int v) {
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[vertex];
+        stack.add(v);
+        while (!stack.isEmpty()) {
+            int nodeCurrent = stack.pop();
+            if(!visited[nodeCurrent]) {
+                visited[nodeCurrent] = true;
+                System.out.print(nodeCurrent+" ");
+                Set<Integer> listNeighbor = adjList.get(nodeCurrent);
+                stack.addAll(listNeighbor);
+            }
+        }
+        System.out.println();
+    }
+
+    @Override
+    public boolean isConnect() {
+        List<Integer> list = new ArrayList<>();
+        boolean[] visited = new boolean[vertex];
+        int nodeFirst = 0;
+        recursive(list, visited, nodeFirst);
+        return list.size()==vertex;
+    }
+    public void recursive(List<Integer> list, boolean[] visited, int node) {
+        if(!visited[node]) {
+            visited[node] = true;
+            list.add(node);
+            for(int e : adjList.get(node)) {
+                recursive(list, visited, e);
+            }
+        }
+
+    }
+    @Override
+    public boolean isPath(int x, int y) {
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[vertex];
+        queue.add(x);
+        visited[x] = true;
+        while(!queue.isEmpty()) {
+            int nodeCurrent = queue.poll();
+            Set<Integer> listNeighbor = adjList.get(nodeCurrent);
+            for(int e : listNeighbor) {
+                if(!visited[e]) {
+                    if(e == y) return true;
+                    queue.add(e);
+                    visited[e] = true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int countConnect() {
+        int count = 0;
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[vertex];
+        for(int i=0; i< vertex; i++) {
+            if(!visited[i]) {
+                count++;
+                queue.add(i);
+                visited[i] = true;
+                while(!queue.isEmpty()) {
+                    int nodeCurrent = queue.poll();
+                    Set<Integer> listNeighbor = adjList.get(nodeCurrent);
+                    for(int e : listNeighbor) {
+                        if(!visited[e]) {
+                            queue.add(e);
+                            visited[e] = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        return count;
+    }
 }

@@ -62,4 +62,34 @@ public class DirectedGraph extends Graph {
             System.out.println();
         }
     }
+
+    @Override
+    public boolean isSimpleGraph() {
+        return false;
+    }
+
+    @Override
+    public void bfs(int v) {
+
+    }
+
+    @Override
+    public void dfs(int v) {
+
+    }
+
+    @Override
+    public boolean isConnect() {
+        return false;
+    }
+
+    @Override
+    public boolean isPath(int x, int y) {
+        return false;
+    }
+
+    @Override
+    public int countConnect() {
+        return 0;
+    }
 }
