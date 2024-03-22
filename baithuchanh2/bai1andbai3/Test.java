@@ -14,7 +14,7 @@ public class Test {
 //        Graph g3 = new UnDirectedGraph("baithuchanh2/bai1andbai3/H2.txt");
 //        System.out.println(g3.isPath(0,8));
 //        System.out.println(g3.countConnect());
-        Graph g2 = new DirectedGraph("baithuchanh2/bai1andbai3/G3.txt");
+        Graph g2 = new DirectedGraph("baithuchanh2/bai1andbai3/G1.txt");
 //        g2.printMatrix();
 //        g2.printListEdges();
 //        g2.printAdjList();
