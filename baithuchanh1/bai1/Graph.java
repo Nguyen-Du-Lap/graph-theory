@@ -1,5 +1,8 @@
 package baithuchanh1.bai1;
 
+import java.io.IOException;
+import java.util.List;
+
 public abstract class Graph {
     int vertex;
     int[][] adjMatrix;
@@ -7,11 +10,21 @@ public abstract class Graph {
         this.vertex = vertex;
         this.adjMatrix = new int[vertex][vertex];
     }
+    public Graph(int[][] arr) {
+    	for(int i=0;i<vertex;i++) {
+    		for(int j=0;j<vertex;j++) {
+    			adjMatrix[i][j] = arr[i][j];
+    		}
+    	}
+    }
+    public Graph(String path) throws IOException {
+    	initMatrixFromFile(path);
+    }
     public abstract void addEdge(int i, int j);
     public abstract void removeEdge(int i, int j);
     public abstract int degree(int v);
     public abstract int edges();
-    // danh sách kề
+    // danh sÃ¡ch ká»�
     public void adjacencyList(){
         for (int i=0; i < vertex; i++) {
             System.out.print(i+"| ");
@@ -23,7 +36,7 @@ public abstract class Graph {
             System.out.println("");
         }
     }
-    // ma trận kề
+    // ma tráº­n ká»�
     public void adjacencyMatrix(){
         for (int i = 0; i < vertex; i++) {
             for (int j = 0; j < vertex; j++) {
@@ -32,7 +45,8 @@ public abstract class Graph {
             System.out.println("");
         }
     }
-    // danh sách cạnh
+    public abstract void printAdjList();
+    // danh sÃ¡ch cáº¡nh
     public abstract void edgeList();
     public boolean isCheckerBipartite(){
         return false;
@@ -50,4 +64,7 @@ public abstract class Graph {
     public abstract boolean isConnectionDFSStack();
     public abstract boolean isEuler();
     public abstract boolean isHalfEuler();
+    public abstract List<Integer> euler();
+    public abstract  boolean haveEdge(int i, int j);
+    public abstract void initMatrixFromFile(String path) throws IOException;
 }

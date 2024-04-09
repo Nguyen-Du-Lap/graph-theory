@@ -1,11 +1,21 @@
 package baithuchanh1.bai1;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class UnDirectedGraph extends Graph {
 
     public UnDirectedGraph(int vertex) {
         super(vertex);
+    }
+    public UnDirectedGraph(int[][] arr) {
+        super(arr);
+    }
+    public UnDirectedGraph(String path) throws IOException {
+    	super(path);
     }
 
     @Override
@@ -66,20 +76,20 @@ public class UnDirectedGraph extends Graph {
 
         vQueue.offer(0);
         vColors[0] = RED;
-        // duyệt qua các đỉnh trong đồ thị,
-        // tránh trường hợp đồ thị không liên thông không thể xét hết các đỉnh
+        // duyá»‡t qua cÃ¡c Ä‘á»‰nh trong Ä‘á»“ thá»‹,
+        // trÃ¡nh trÆ°á»�ng há»£p Ä‘á»“ thá»‹ khÃ´ng liÃªn thÃ´ng khÃ´ng thá»ƒ xÃ©t háº¿t cÃ¡c Ä‘á»‰nh
         for (int i = 0; i < vertex; i++) {
             while (!vQueue.isEmpty()) {
                 int vCurrent = vQueue.poll();
                 int colorCurrent = vColors[vCurrent];
                 int colorNext = colorCurrent == RED ? GREEN : RED;
-                // duyệt của từng đỉnh kề của vCurrent
+                // duyá»‡t cá»§a tá»«ng Ä‘á»‰nh ká»� cá»§a vCurrent
                 for (int j = 0; j < adjMatrix[vCurrent].length; j++) {
-                    // kiểm tra đỉnh có kề với đỉnh đang xét
+                    // kiá»ƒm tra Ä‘á»‰nh cÃ³ ká»� vá»›i Ä‘á»‰nh Ä‘ang xÃ©t
                     if (adjMatrix[vCurrent][j] == 1) {
-                        // 2 đỉnh kề nhau cùng màu trả về false
+                        // 2 Ä‘á»‰nh ká»� nhau cÃ¹ng mÃ u tráº£ vá»� false
                         if (vColors[j] == colorCurrent) return false;
-                        // đỉnh chưa xét mới bỏ vào queue
+                        // Ä‘á»‰nh chÆ°a xÃ©t má»›i bá»� vÃ o queue
                         if (vColors[j] == NONE_COLOR) {
                             vQueue.offer(j);
                             vColors[j] = colorNext;
@@ -178,6 +188,93 @@ public class UnDirectedGraph extends Graph {
         }
         return countOdd == 2 || countOdd == 0;
     }
+
+	@Override
+	public List<Integer> euler() {
+		List<Integer> C = new ArrayList<Integer>();
+		if(!isEuler()) return null;
+		Graph H = this.copy();
+		int a = 0;
+		int m = H.edges();
+		C.add(a);
+		while(m>0) {
+			int v = 0;
+			for(int i=0; i < C.size(); i++) {
+				if(H.degree(i) > 0) {
+					v = i;
+					break;
+				}
+			}
+			List<Integer> sub = new ArrayList<Integer>();
+			int i = v;
+			while(H.degree(i) > 0) {
+				sub.add(i);
+				for(int j=0; j<vertex;j++) {
+					if(H.haveEdge(i, j)) {
+						H.removeEdge(i, j);
+						i=j;
+						m--;
+						break;
+					}
+				}
+			}
+//			sub.add(v);
+			C.addAll(v, sub);
+		}
+		return C;
+	}
+	@Override
+	public boolean haveEdge(int i, int j) {
+		for(int k=0; k<vertex;k++) {
+			for(int l=0; l < vertex; l++) {
+				if(adjMatrix[i][j] > 0) return true;
+			}
+		}
+		return false;
+	}
+	private Graph copy() {
+		Graph tmp= new UnDirectedGraph(this.adjMatrix.length);
+		for(int i=0;i<vertex;i++) {
+			for(int j=i; j<vertex;j++) {
+				if(adjMatrix[i][j] > 0) {
+                    for(int k=0; k<adjMatrix[i][j]; k++) {
+                        tmp.addEdge(i, j);
+                    }
+				}
+			}
+		}
+		return tmp;
+	}
+	
+	@Override
+    public void initMatrixFromFile(String path) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+        this.vertex = Integer.parseInt(reader.readLine());
+        adjMatrix = new int[vertex][vertex];
+
+        String line;
+        int row = 0;
+        while ((line = reader.readLine()) != null) {
+            StringTokenizer st = new StringTokenizer(line);
+            for (int i = 0; i < vertex; i++) {
+                this.adjMatrix[row][i] = Integer.parseInt(st.nextToken());
+            }
+            row++;
+        }
+        reader.close();
+    }
+	@Override
+	public void printAdjList() {
+		System.out.println("Ma tran ke vo huong:");
+        for (int i = 0; i < vertex; i++) {
+            for(int j = 0; j < vertex; j++) {
+                System.out.print(adjMatrix[i][j]+" " );
+            }
+            System.out.println();
+        }
+		
+	}
+	
 
 
 

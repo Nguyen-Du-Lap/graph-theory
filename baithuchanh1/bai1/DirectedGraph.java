@@ -1,5 +1,8 @@
 package baithuchanh1.bai1;
 
+import java.io.IOException;
+import java.util.List;
+
 public class DirectedGraph extends Graph {
 
     public DirectedGraph(int vertex) {
@@ -85,6 +88,30 @@ public class DirectedGraph extends Graph {
     public boolean isHalfEuler() {
         return false;
     }
+
+	@Override
+	public List<Integer> euler() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean haveEdge(int i, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void initMatrixFromFile(String path) throws IOException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void printAdjList() {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 }

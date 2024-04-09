@@ -170,9 +170,8 @@ public class DirectedGraph extends Graph {
     }
     public boolean isCheckConnectStrong(int[][] arr){
         for (int i = 0; i < arr.length; i++) {
-            for (int j = i; j < arr.length; j++) {
-                if(adjMatrix[i][j] > 0 && adjMatrix[j][i] == 0) return false;
-                if(adjMatrix[i][j] == 0 && adjMatrix[j][i] > 0) return false;
+            for (int j = 0; j < arr.length; j++) {
+                if(!isPath(i,j)) return false;
             }
         }
         return true;
