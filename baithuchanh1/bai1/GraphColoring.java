@@ -88,19 +88,41 @@ public class GraphColoring {
         return result;
     }
 
+    public static int[] paintGraph(int[][] graph) {
+        int totalVertex = graph[0].length;
+        int[] colors = new int[totalVertex];
+
+        for(int v=0; v<totalVertex; v++) {
+            List<Integer> maudadung = new ArrayList<>();
+            for(int i=0; i<totalVertex; i++) {
+                if(graph[v][i]==1 && colors[i] > 0) {
+                    maudadung.add(colors[i]);
+                }
+            }
+            int mauchon = 1;
+            while (maudadung.contains(mauchon)) {
+                mauchon++;
+            }
+            colors[v] = mauchon;
+        }
+        return colors;
+    }
+
     public static void main(String[] args) throws IOException {
-//        int[][] graph = {
-//                {0, 1, 0, 0, 1, 1, 1},
-//                {1, 0, 1, 1, 0, 0, 1},
-//                {0, 1, 0, 1, 0, 0, 0},
-//                {0, 1, 1, 0, 1, 0, 1},
-//                {1, 0, 0, 1, 0, 1 ,1},
-//                {1, 0, 0, 0, 1, 0 ,0},
-//                {1, 1, 0, 1, 1, 0, 0}
-//        };
+        int[][] graph = {
+                {0, 1, 0, 0, 1, 1, 1},
+                {1, 0, 1, 1, 0, 0, 1},
+                {0, 1, 0, 1, 0, 0, 0},
+                {0, 1, 1, 0, 1, 0, 1},
+                {1, 0, 0, 1, 0, 1 ,1},
+                {1, 0, 0, 0, 1, 0 ,0},
+                {1, 1, 0, 1, 1, 0, 0}
+        };
 //        int numColors = graphColoring(graph);
 //        System.out.println("Số màu cần: " + numColors);
         int[][] arr = extractGraphFromFile("baithuchanh1//bai1//SV_MONHOC.txt");
         System.out.println(graphColoring(arr));
+        System.out.println(Arrays.toString(paintGraph(graph))) ;
+
     }
 }
