@@ -11,9 +11,6 @@ public class UnDirectedGraph extends Graph {
     public UnDirectedGraph(int vertex) {
         super(vertex);
     }
-    public UnDirectedGraph(int[][] arr) {
-        super(arr);
-    }
     public UnDirectedGraph(String path) throws IOException {
     	super(path);
     }
@@ -263,7 +260,15 @@ public class UnDirectedGraph extends Graph {
         }
         reader.close();
     }
-	@Override
+
+    @Override
+    public boolean isTree() {
+        if(!isConnectionBFS()) return false;
+        if(edges() != vertex-1) return false;
+        return true;
+    }
+
+    @Override
 	public void printAdjList() {
 		System.out.println("Ma tran ke vo huong:");
         for (int i = 0; i < vertex; i++) {

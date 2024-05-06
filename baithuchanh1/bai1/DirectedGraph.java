@@ -107,7 +107,12 @@ public class DirectedGraph extends Graph {
 		
 	}
 
-	@Override
+    @Override
+    public boolean isTree() {
+        return false;
+    }
+
+    @Override
 	public void printAdjList() {
 		// TODO Auto-generated method stub
 		

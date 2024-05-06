@@ -10,13 +10,6 @@ public abstract class Graph {
         this.vertex = vertex;
         this.adjMatrix = new int[vertex][vertex];
     }
-    public Graph(int[][] arr) {
-    	for(int i=0;i<vertex;i++) {
-    		for(int j=0;j<vertex;j++) {
-    			adjMatrix[i][j] = arr[i][j];
-    		}
-    	}
-    }
     public Graph(String path) throws IOException {
     	initMatrixFromFile(path);
     }
@@ -67,4 +60,5 @@ public abstract class Graph {
     public abstract List<Integer> euler();
     public abstract  boolean haveEdge(int i, int j);
     public abstract void initMatrixFromFile(String path) throws IOException;
+    public abstract boolean isTree();
 }
