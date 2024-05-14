@@ -20,6 +20,9 @@ public class Test {
 		g.printAdjList();
 		System.out.println(g.isEnough());
 		System.out.println(g.isTree());
-		System.out.println(g.eccentricity(1));
+		System.out.println(g.eccentricity(2));
+		System.out.println(g.radius());
+		System.out.println(g.centers());
+
     }
 }

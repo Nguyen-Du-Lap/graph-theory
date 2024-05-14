@@ -1,10 +1,7 @@
 package baithuchanh1.bai1;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class UnDirectedTree extends  UnDirectedGraph{
     public int root;
@@ -50,22 +47,63 @@ public class UnDirectedTree extends  UnDirectedGraph{
     }
     public int eccentricity(int v) {
         int max = 0;
-        List<Integer> list = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
         int[] visited = new int[vertex];
         Queue<Integer> queue = new LinkedList<>();
         queue.add(v);
         visited[v] = 1;
-        list.add(v);
+        map.put(v, 0);
         while(!queue.isEmpty()) {
             int nodeCurrent = queue.poll();
             for(int i = 0; i < this.adjMatrix[nodeCurrent].length; i++) {
                 if(this.adjMatrix[nodeCurrent][i] == 1 && visited[i] == 0) {
+                    // get value node parent +1
+                    for(int j = 0 ; j < this.vertex; j++) {
+                        if(haveEdge(i,j) && visited[j] == 1) {
+                            map.put(i, map.get(j)+1);
+                        }
+                    }
+
                     queue.add(i);
                     visited[i] = 1;
                 }
             }
         }
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            int value = entry.getValue();
+            if(value > max) {
+                max = value;
+            }
+        }
         return max;
+    }
+
+    public int radius() {
+        int min = eccentricity(0);
+        for(int i = 1; i < this.vertex; i++) {
+            int e = eccentricity(i);
+            if(e < min) {
+                min = e;
+            }
+        }
+        return min;
+    }
+
+    public List<Integer> centers() {
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for(int i = 0; i < this.vertex; i++) {
+            int e = eccentricity(i);
+            List<Integer> list = map.containsKey(e) ? map.get(e) : new ArrayList<>();
+            list.add(i);
+            map.put(e, list);
+        }
+        int min = Integer.MAX_VALUE;
+        for(Map.Entry<Integer, List<Integer>> entry : map.entrySet()) {
+            if(entry.getKey() < min) {
+                min = entry.getKey();
+            }
+        }
+        return map.get(min);
     }
 
 }
